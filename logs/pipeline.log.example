@@ -1,0 +1,143 @@
+2026-03-07 21:07:30,541 | INFO | __main__ | Pipeline started
+2026-03-07 21:07:30,541 | INFO | pipeline.extract | Starting extraction for LOCAL_DATE=2026-03-07
+2026-03-07 21:07:31,131 | WARNING | pipeline.extract | No data returned for LOCAL_DATE=2026-03-07
+2026-03-07 21:07:31,131 | INFO | __main__ | Extracted 0 records
+2026-03-07 21:07:31,131 | INFO | __main__ | Pipeline finished
+2026-03-07 21:19:30,237 | INFO | __main__ | Pipeline started
+2026-03-07 21:19:30,237 | INFO | pipeline.extract | Starting extraction for LOCAL_DATE=2026-03-06
+2026-03-07 21:19:30,872 | INFO | pipeline.extract | Successfully retrieved 24 records
+2026-03-07 21:19:30,881 | INFO | __main__ | Extracted 24 records
+2026-03-07 21:19:30,881 | INFO | __main__ | Pipeline finished
+2026-03-07 21:45:17,187 | INFO | __main__ | Pipeline started
+2026-03-07 21:45:17,187 | INFO | pipeline.extract | Starting extraction for LOCAL_DATE=2026-03-05
+2026-03-07 21:45:17,639 | INFO | pipeline.extract | Successfully retrieved 24 records
+2026-03-07 21:45:17,640 | INFO | __main__ | Extracted 24 records
+2026-03-07 21:45:17,640 | INFO | __main__ | Pipeline finished
+2026-03-07 21:49:28,820 | INFO | __main__ | Pipeline started
+2026-03-07 21:49:28,820 | INFO | pipeline.extract | Starting extraction for LOCAL_DATE=2026-03-21
+2026-03-07 21:49:29,267 | WARNING | pipeline.extract | No data returned for LOCAL_DATE=2026-03-21
+2026-03-07 21:49:29,267 | INFO | __main__ | Extracted 0 records
+2026-03-07 21:49:29,267 | INFO | __main__ | Pipeline finished
+2026-03-07 22:06:44,919 | INFO | __main__ | Pipeline started
+2026-03-07 22:06:44,919 | INFO | pipeline.extract | Starting extraction for LOCAL_DATE=2026-03-21
+2026-03-07 22:06:44,990 | ERROR | pipeline.extract | API request failed: HTTPSConnectionPool(host='api.weathers.gc.ca', port=443): Max retries exceeded with url: /collections/climate-hourly/items?f=json&CLIMATE_IDENTIFIER=8202251&LOCAL_DATE=2026-03-21&limit=30&skipGeometry=true (Caused by NameResolutionError("HTTPSConnection(host='api.weathers.gc.ca', port=443): Failed to resolve 'api.weathers.gc.ca' ([Errno 11001] getaddrinfo failed)"))
+2026-03-07 22:06:44,990 | ERROR | __main__ | Pipeline failed
+Traceback (most recent call last):
+  File "W:\projects\hiaa-climate-pipeline\.venv\Lib\site-packages\urllib3\connection.py", line 204, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "W:\projects\hiaa-climate-pipeline\.venv\Lib\site-packages\urllib3\util\connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\saini\AppData\Local\Programs\Python\Python312\Lib\socket.py", line 963, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "W:\projects\hiaa-climate-pipeline\.venv\Lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "W:\projects\hiaa-climate-pipeline\.venv\Lib\site-packages\urllib3\connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "W:\projects\hiaa-climate-pipeline\.venv\Lib\site-packages\urllib3\connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+  File "W:\projects\hiaa-climate-pipeline\.venv\Lib\site-packages\urllib3\connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+  File "W:\projects\hiaa-climate-pipeline\.venv\Lib\site-packages\urllib3\connection.py", line 759, in connect
+    self.sock = sock = self._new_conn()
+                       ^^^^^^^^^^^^^^^^
+  File "W:\projects\hiaa-climate-pipeline\.venv\Lib\site-packages\urllib3\connection.py", line 211, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: HTTPSConnection(host='api.weathers.gc.ca', port=443): Failed to resolve 'api.weathers.gc.ca' ([Errno 11001] getaddrinfo failed)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "W:\projects\hiaa-climate-pipeline\.venv\Lib\site-packages\requests\adapters.py", line 644, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "W:\projects\hiaa-climate-pipeline\.venv\Lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "W:\projects\hiaa-climate-pipeline\.venv\Lib\site-packages\urllib3\util\retry.py", line 535, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.weathers.gc.ca', port=443): Max retries exceeded with url: /collections/climate-hourly/items?f=json&CLIMATE_IDENTIFIER=8202251&LOCAL_DATE=2026-03-21&limit=30&skipGeometry=true (Caused by NameResolutionError("HTTPSConnection(host='api.weathers.gc.ca', port=443): Failed to resolve 'api.weathers.gc.ca' ([Errno 11001] getaddrinfo failed)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "W:\projects\hiaa-climate-pipeline\pipeline\main.py", line 60, in main
+    features = fetch_climate_data(target_date)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "W:\projects\hiaa-climate-pipeline\pipeline\extract.py", line 43, in fetch_climate_data
+    response = requests.get(endpoint, params=params, timeout=timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "W:\projects\hiaa-climate-pipeline\.venv\Lib\site-packages\requests\api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "W:\projects\hiaa-climate-pipeline\.venv\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "W:\projects\hiaa-climate-pipeline\.venv\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "W:\projects\hiaa-climate-pipeline\.venv\Lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "W:\projects\hiaa-climate-pipeline\.venv\Lib\site-packages\requests\adapters.py", line 677, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.weathers.gc.ca', port=443): Max retries exceeded with url: /collections/climate-hourly/items?f=json&CLIMATE_IDENTIFIER=8202251&LOCAL_DATE=2026-03-21&limit=30&skipGeometry=true (Caused by NameResolutionError("HTTPSConnection(host='api.weathers.gc.ca', port=443): Failed to resolve 'api.weathers.gc.ca' ([Errno 11001] getaddrinfo failed)"))
+2026-03-07 22:07:23,501 | INFO | __main__ | Pipeline started
+2026-03-07 22:07:23,501 | INFO | pipeline.extract | Starting extraction for LOCAL_DATE=2026-03-21
+2026-03-07 22:07:23,993 | WARNING | pipeline.extract | No data returned for LOCAL_DATE=2026-03-21
+2026-03-07 22:07:23,993 | INFO | __main__ | Extracted 0 records
+2026-03-07 22:07:23,993 | INFO | __main__ | Pipeline finished
+2026-03-08 00:45:37,303 | INFO | __main__ | Pipeline started
+2026-03-08 00:45:37,303 | INFO | pipeline.extract | Starting extraction for LOCAL_DATE=2026-03-06
+2026-03-08 00:45:38,238 | INFO | pipeline.extract | Successfully retrieved 24 records
+2026-03-08 00:45:38,239 | INFO | __main__ | Extracted 24 records
+2026-03-08 00:45:38,240 | INFO | pipeline.transform | Transformed 24 records
+2026-03-08 00:45:38,240 | INFO | __main__ | Transformed 24 records
+2026-03-08 00:45:38,243 | INFO | pipeline.load | Inserted 24 records for date 2026-03-06
+2026-03-08 00:45:38,244 | INFO | __main__ | Pipeline finished successfully
+2026-03-08 00:46:21,222 | INFO | __main__ | Pipeline started
+2026-03-08 00:46:21,222 | INFO | pipeline.extract | Starting extraction for LOCAL_DATE=2026-03-06
+2026-03-08 00:46:21,701 | INFO | pipeline.extract | Successfully retrieved 24 records
+2026-03-08 00:46:21,701 | INFO | __main__ | Extracted 24 records
+2026-03-08 00:46:21,701 | INFO | pipeline.transform | Transformed 24 records
+2026-03-08 00:46:21,701 | INFO | __main__ | Transformed 24 records
+2026-03-08 00:46:21,701 | WARNING | pipeline.load | Data for 2026-03-06 already exists in database. Skipping insert.
+2026-03-08 00:46:21,701 | INFO | __main__ | Pipeline finished successfully
+2026-03-08 00:46:50,343 | INFO | __main__ | Pipeline started
+2026-03-08 00:46:50,343 | INFO | pipeline.extract | Starting extraction for LOCAL_DATE=2026-03-07
+2026-03-08 00:46:50,897 | WARNING | pipeline.extract | No data returned for LOCAL_DATE=2026-03-07
+2026-03-08 00:46:50,899 | INFO | __main__ | Extracted 0 records
+2026-03-08 00:46:50,899 | WARNING | __main__ | No features returned from API. Pipeline exiting.
+2026-03-08 00:48:14,651 | INFO | __main__ | Pipeline started
+2026-03-08 00:48:14,651 | INFO | pipeline.extract | Starting extraction for LOCAL_DATE=2026-03-05
+2026-03-08 00:48:15,203 | INFO | pipeline.extract | Successfully retrieved 24 records
+2026-03-08 00:48:15,203 | INFO | __main__ | Extracted 24 records
+2026-03-08 00:48:15,203 | INFO | pipeline.transform | Transformed 24 records
+2026-03-08 00:48:15,203 | INFO | __main__ | Transformed 24 records
+2026-03-08 00:48:15,203 | INFO | pipeline.load | Inserted 24 records for date 2026-03-05
+2026-03-08 00:48:15,203 | INFO | __main__ | Pipeline finished successfully
+2026-03-08 13:03:22,475 | INFO | __main__ | Pipeline started
+2026-03-08 13:03:22,475 | INFO | pipeline.extract | Starting extraction for LOCAL_DATE=2026-03-05
+2026-03-08 13:03:23,043 | INFO | pipeline.extract | Successfully retrieved 24 records
+2026-03-08 13:03:23,045 | INFO | __main__ | Extracted 24 records
+2026-03-08 13:03:23,045 | INFO | pipeline.transform | Transformed 24 records
+2026-03-08 13:03:23,045 | INFO | __main__ | Transformed 24 records
+2026-03-08 13:03:23,054 | WARNING | pipeline.load | Data for 2026-03-05 already exists in database. Skipping insert.
+2026-03-08 13:03:23,055 | INFO | __main__ | Pipeline finished successfully
+2026-03-08 13:03:37,540 | INFO | __main__ | Pipeline started
+2026-03-08 13:03:37,540 | INFO | pipeline.extract | Starting extraction for LOCAL_DATE=2026-03-07
+2026-03-08 13:03:38,014 | INFO | pipeline.extract | Successfully retrieved 24 records
+2026-03-08 13:03:38,014 | INFO | __main__ | Extracted 24 records
+2026-03-08 13:03:38,014 | INFO | pipeline.transform | Transformed 24 records
+2026-03-08 13:03:38,014 | INFO | __main__ | Transformed 24 records
+2026-03-08 13:03:38,014 | INFO | pipeline.load | Inserted 24 records for date 2026-03-07
+2026-03-08 13:03:38,030 | INFO | __main__ | Pipeline finished successfully
