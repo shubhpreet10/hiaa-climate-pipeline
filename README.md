@@ -311,6 +311,15 @@ Run the pipeline:
 
 The script automatically calculates the previous day's date and runs the pipeline.
 
+> **Note**
+> If the script is executed **early in the UTC day**, it is possible that the records for the specified climate identifier are not yet available from the API. In that case, the pipeline may log a message similar to:
+>
+> ```
+> INFO | __main__ | Extracted 0 records
+> ```
+>
+> This is **normal and expected behavior**. When the pipeline is scheduled to run later in the day (for example **23:00 UTC**), the records are  available and the pipeline will process them normally.
+
 ---
 
 ## Verify Results
@@ -377,6 +386,10 @@ docker run --rm hiaa-climate-pipeline
 The container implementation is intentionally simple and focuses on providing a clean execution environment. Persistent storage configuration was not included due to the scope and time constraints of this assessment.
 
 ---
+
+## Testing
+
+The pipeline was tested on a clean **Ubuntu Linux environment (AWS EC2 instance)** using the Quick Start steps described above. This ensures the setup instructions are reproducible in a fresh environment.
 
 ## Summary
 
