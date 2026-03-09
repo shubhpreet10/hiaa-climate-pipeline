@@ -396,3 +396,7 @@ The pipeline was tested on a clean **Ubuntu Linux environment (AWS EC2 instance)
 This project demonstrates a production-oriented ETL pipeline for ingesting hourly climate observations from the GeoMet API and loading them into an SQLite database.
 
 The implementation incorporates practical engineering considerations such as API behavior analysis, duplicate protection, resilient data handling, automated scheduling, structured logging, and reproducible execution using scripts and Docker.
+
+
+
+Submission branch created for assessment review.
